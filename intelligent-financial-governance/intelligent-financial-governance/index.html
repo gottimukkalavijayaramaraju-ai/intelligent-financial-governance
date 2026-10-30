@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intelligent Financial Governance</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div class="top">
+    <div>
+      <h1>Intelligent Financial Governance</h1>
+      <p class="sub">Set spending policies, record transactions, and let the rules engine score risk, flag anomalies and route large payments to an approver.</p>
+    </div>
+    <button id="reset">Reset demo data</button>
+  </div>
+
+  <section class="grid kpis" id="kpis" aria-label="Summary"></section>
+
+  <section class="grid two">
+    <div class="panel">
+      <h2>Add transaction</h2>
+      <form id="txForm" onsubmit="return false">
+        <div class="row">
+          <label>Date<input type="date" id="fDate" required></label>
+          <label>Amount (₹)<input type="number" id="fAmt" min="1" step="0.01" required></label>
+        </div>
+        <label>Merchant<input id="fMer" required placeholder="e.g. Office Mart"></label>
+        <label>Category<select id="fCat"></select></label>
+        <button class="primary" id="addBtn">Check and record</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h2>Governance policies</h2>
+      <div class="row">
+        <label>Approval needed above (₹)<input type="number" id="pLimit" min="0"></label>
+        <label>Anomaly sensitivity (z-score)<input type="number" id="pZ" min="1" max="5" step="0.1"></label>
+      </div>
+      <label>Blocked merchants (comma separated)<input id="pBlock"></label>
+      <h2 style="margin-top:6px">Monthly budgets (₹)</h2>
+      <div class="row" id="budgets"></div>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="panel">
+      <h2>Budget use this month</h2>
+      <div id="budgetBars"></div>
+    </div>
+    <div class="panel">
+      <h2>Approval queue</h2>
+      <div id="queue"></div>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-bottom:16px">
+    <h2>Transactions</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Date</th><th>Merchant</th><th>Category</th><th class="n">Amount</th><th>Risk</th><th>Status</th></tr></thead>
+      <tbody id="txBody"></tbody>
+    </table></div>
+  </section>
+
+  <section class="panel">
+    <h2>Audit log</h2>
+    <div class="log" id="log"></div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
